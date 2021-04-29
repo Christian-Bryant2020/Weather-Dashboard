@@ -1,0 +1,13 @@
+.jumbotron{
+    background-color: white;
+    border-style: solid;
+    border-width: thin;
+}
+.card{
+    background-color: lightblue;
+    border-style: solid;
+    border-width: thin;
+}
+.btn1{
+    background-color: white;
+}

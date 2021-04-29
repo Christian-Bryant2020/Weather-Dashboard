@@ -8,6 +8,10 @@ let weatherSearch = function(event) {
     inputValue = cityInput.value.trim();
     let apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid='+ apiKey;
 console.log(apiUrl)
+    localStorage.setItem('City',inputValue);
+    let recentEntry = localStorage.getItem('City');
+    document.getElementById('location').textContent = "Search results for: " + recentEntry;
+    
 }
 
 btn.onclick= weatherSearch;

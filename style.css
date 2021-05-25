@@ -11,3 +11,15 @@
 .btn1{
     background-color: white;
 }
+.green{
+    background-color: green;
+}
+.orange{
+    background-color: orange;
+}
+.red{
+    background-color: red;
+    padding: 3px;
+    display: inline;
+    color: white;
+}

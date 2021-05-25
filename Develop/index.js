@@ -17,7 +17,7 @@ const currentDate = '(' + mm + '/' + dd + '/' + yyyy + ')';
 let weatherSearch = function (event) {
     let cityInput = document.getElementById('citySearch');
     inputValue = cityInput.value.trim();
-    let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
+    let apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
 
     //local storage set item
     localStorage.setItem('City', inputValue);
@@ -45,7 +45,7 @@ let weatherSearch = function (event) {
             let lon = data.coord.lon;
 
             //second fetch for UV information
-            let uvapiURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+            let uvapiURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
             fetch(uvapiURL)
                 .then(function (response) {
                     return response.json();
@@ -65,7 +65,7 @@ let weatherSearch = function (event) {
                 })
 
             //third fetch for 5 day forecast 
-            let fiveDayapiURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
+            let fiveDayapiURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
             let dayCount = 1;
             fetch(fiveDayapiURL)
                 .then(function (response) {
@@ -74,7 +74,7 @@ let weatherSearch = function (event) {
                 .then(function (data) {
                     for (i = 0; i < 5; i++) {
                         var icon = document.querySelector("#icon" + dayCount);
-                        icon.src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png";
+                        icon.src = "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png";
                         document.getElementById("date" + dayCount).innerHTML = data.list[i].dt_txt.substring(0, 10);
                         document.getElementById("temp" + dayCount).innerHTML = "Temp: " + data.list[i].main.temp + "F";
                         document.getElementById("humidity" + dayCount).innerHTML = "Humidity: " + data.list[i].main.humidity + "%";

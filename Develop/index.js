@@ -11,22 +11,32 @@ const mm = String(today.getMonth() + 1).padStart(2, '0');
 const yyyy = today.getFullYear();
 const currentDate = '(' + mm + '/' + dd + '/' + yyyy + ')';
 const iconEl = document.getElementById('icon');
-
+var citiesArray = []//JSON.parse(localStorage.getItem('history'));
                         
 
 
 let weatherSearch = function (event) {
     let cityInput = document.getElementById('citySearch');
     inputValue = cityInput.value.trim();
+    citiesArray.push(inputValue)
     let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
-
+console.log(citiesArray)
     //local storage set item
-    localStorage.setItem('City', inputValue);
-    let recentEntry = localStorage.getItem('City');
+    localStorage.setItem('City', JSON.stringify(citiesArray));
+    let recentEntry = JSON.parse(localStorage.getItem('City'));
+    //let searchedLocations= document.getElementById('location').textContent;
+    console.log(inputValue)
 
-    document.getElementById('location').textContent = recentEntry;
-    document.getElementById('cityName').textContent = recentEntry + ' ' + currentDate;
+    document.getElementById('cityName').textContent = inputValue + ' ' + currentDate;
 
+    // Local Storage get
+    //  function (recentEntry){
+    //     for(i=0; i < citiesArray.; i++){
+
+    //     }
+    // }
+
+    
     //first fetch for base information
     fetch(apiUrl)
         .then(function (response) {
@@ -48,7 +58,6 @@ let weatherSearch = function (event) {
 
             //second fetch for UV information
             let uvapiURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
-            console.log(uvapiURL)
             fetch(uvapiURL)
                 .then(function (response) {
                     return response.json();

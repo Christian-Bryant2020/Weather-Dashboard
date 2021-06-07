@@ -14,4 +14,4 @@ When the search button is clicked, you will get the following information:
 
  https://christian-bryant2020.github.io/Weather-Dashboard/
 
- ![Dashboard Image](./Assets/weather-dashboard.png)
+ ![Dashboard Image](./Assets/weather-dashboard.PNG)

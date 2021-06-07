@@ -11,32 +11,29 @@ const mm = String(today.getMonth() + 1).padStart(2, '0');
 const yyyy = today.getFullYear();
 const currentDate = '(' + mm + '/' + dd + '/' + yyyy + ')';
 const iconEl = document.getElementById('icon');
-var citiesArray = []//JSON.parse(localStorage.getItem('history'));
-                        
+const locationEl = document.getElementById('location')
+var citiesArray = []
+
 
 
 let weatherSearch = function (event) {
+
     let cityInput = document.getElementById('citySearch');
     inputValue = cityInput.value.trim();
     citiesArray.push(inputValue)
     let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputValue + '&appid=' + apiKey + '&units=imperial';
-console.log(citiesArray)
     //local storage set item
     localStorage.setItem('City', JSON.stringify(citiesArray));
     let recentEntry = JSON.parse(localStorage.getItem('City'));
     //let searchedLocations= document.getElementById('location').textContent;
-    console.log(inputValue)
-
     document.getElementById('cityName').textContent = inputValue + ' ' + currentDate;
 
-    // Local Storage get
-    //  function (recentEntry){
-    //     for(i=0; i < citiesArray.; i++){
+    for (i = 0; i < recentEntry.length; i++)
+        var li = document.createElement('li');
+    locationEl.appendChild(li);
+    li.innerHTML = recentEntry[i-1]
 
-    //     }
-    // }
 
-    
     //first fetch for base information
     fetch(apiUrl)
         .then(function (response) {
@@ -52,7 +49,7 @@ console.log(citiesArray)
             document.getElementById('humid').textContent = 'Humid ' + humidValue + '%';
             document.getElementById('wind').textContent = 'Wind ' + windValue + ' MPH';
             iconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
-            
+
             let lat = data.coord.lat;
             let lon = data.coord.lon;
 
@@ -61,7 +58,7 @@ console.log(citiesArray)
             fetch(uvapiURL)
                 .then(function (response) {
                     return response.json();
-                }) 
+                })
                 .then(function (data) {
                     let uvValue = data.value;
                     document.getElementById('uv').textContent = 'UV index ' + uvValue;
